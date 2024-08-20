@@ -1,39 +1,70 @@
-# Kitchensink - Spring Boot Application <br>
-The application is migration from Jakarta EE 10 web-enabled database application using JSF, CDI, EJB, JPA, and Bean Validation.<br>
-Application Source - https://github.com/jboss-developer/jboss-eap-quickstarts/tree/8.0.x/kitchensink
----
-## System Requirements<br>
-The application is designed to work on JDK 21.0+ versions<br>
-All you need to build this project is **Java 21.0 (Java JDK 21)** or later and **Maven 3.9.1** or later.<br>
----
-Additionally, the application is connected to MongoDB database to saved data. Make sure you have MongoDB installed.<br>
-To download MongoCompass follow https://www.mongodb.com/products/tools/compass <br>
----
-The application will try to connect via port **27017**, Incase the MongoDB server run on any other port <br>make sure to change the configuration in **application.properties** as well.
+# Kitchensink - Spring Boot Application
 
-The application is designed to run on both servers JBOSS and Tomcat.<br>
-To run the application on JBOSS make sure you have the config files present in WEB-APP folder<br>
-**beans.xml**<br>
-**faces-config.xml**<br>
-**Also make sure you have `*-ds.xml` for database configuration**<br>
-To run the application on Tomcat server nothing will change.
+This project is a migration from a Jakarta EE 10 web-enabled database application utilizing JSF, CDI, EJB, JPA, and Bean Validation.
+
+**Application Source:** [Kitchensink - JBoss EAP Quickstarts](https://github.com/jboss-developer/jboss-eap-quickstarts/tree/8.0.x/kitchensink)
 
 ---
 
-To run the application on JBOSS make sure to uncomment the pom.xml dependencies exclusions.<br> These exclusions are necessary as when the application gets deployed on JBOSS server, 
-these dependencies get conflict with JBOSS dependencies .<br> To run it on tomcat no change needs to be made<br>
-## Building and running the quickstart application with a Tomcat Server
-To build the application go to command prompt Project location and run<br>
-`mvn clean install`<br>
-This will install all the dependencies and post that the application war will get generated in target folder<br>
-Once that is done, we can run the application from target folder by running below command<br>
-`java -jar kitchensink-migration-0.0.1-SNAPSHOT.war`<br>
-This will run the application on 8080 port<br>
+## System Requirements
 
-The application can be accessed via localhost:8080<br>
-The application has Spring Security via BasicAuth. To access the application use any of the below user details<br>
-1. Username: **user**, password: **password**, roles: USER
-2. username: **admin**,password: **admin**, roles: USER,ADMIN
+To build and run this project, ensure you have the following:
 
-To define any other roles add the credentials in SecurityConfig.java<br>
+- **Java JDK 21.0** or later
+- **Maven 3.9.1** or later
+
+Additionally, the application connects to a MongoDB database for data storage. Ensure MongoDB is installed on your system.
+
+- **Default MongoDB Port:** `27017`  
+  If your MongoDB server runs on a different port, update the configuration in the `application.properties` file accordingly.
+
+To download MongoDB Compass, visit: [MongoDB Compass](https://www.mongodb.com/products/tools/compass)
+
+---
+
+## Application Deployment
+
+The application can run on both JBOSS and Tomcat servers. Specific configurations are required for each server:
+
+### JBOSS Server
+
+- Ensure the following configuration files are present in the `WEB-APP` folder:
+  - `beans.xml`
+  - `faces-config.xml`
+  - `*-ds.xml` (Database configuration)
+
+- Uncomment the necessary exclusions in the `pom.xml` file. These exclusions prevent dependency conflicts when deploying on JBOSS.
+
+### Tomcat Server
+
+No additional configuration is required. The application can be run as-is.
+
+---
+
+## Building and Running the Application on a Tomcat Server
+
+1. **Build the Application:**
+   - Navigate to the project directory in your command prompt.
+   - Run the following command to clean and build the project:
+     ```sh
+     mvn clean install
+     ```
+   - This command installs all dependencies and generates a WAR file in the `target` folder.
+
+2. **Run the Application:**
+   - Navigate to the `target` folder.
+   - Run the following command to start the application:
+     ```sh
+     java -jar kitchensink-migration-0.0.1-SNAPSHOT.war
+     ```
+   - The application will run on port `8080`.
+
+3. **Access the Application:**
+   - Open your browser and go to: `http://localhost:8080`
+   
+4. **Authentication:**
+   - The application is secured with Spring Security using Basic Authentication. Use the following credentials:
+     - **User:** `user`, **Password:** `password`, **Roles:** USER
+     - **User:** `admin`, **Password:** `admin`, **Roles:** USER, ADMIN
+   - To define additional roles, modify the `SecurityConfig.java` file.
 
