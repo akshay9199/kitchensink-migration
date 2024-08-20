@@ -1,0 +1,12 @@
+<jboss-deployment-structure>
+    <deployment>
+        <exclude-subsystems>
+            <subsystem name="weld"/>
+        </exclude-subsystems>
+        <exclusions>
+            <module name="ch.qos.logback"/>
+            <module name="org.apache.tomcat.websocket"/>
+            <module name="jakarta.servlet.api" />
+        </exclusions>
+    </deployment>
+</jboss-deployment-structure>

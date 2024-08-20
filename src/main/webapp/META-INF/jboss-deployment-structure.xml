@@ -1,0 +1,9 @@
+<jboss-deployment-structure>
+    <deployment>
+        <exclusions>
+            <module name="org.apache.tomcat.websocket"/>
+            <module name="org.apache.tomcat.catalina"/>
+            <module name="jakarta.servlet.api" />
+        </exclusions>
+    </deployment>
+</jboss-deployment-structure>

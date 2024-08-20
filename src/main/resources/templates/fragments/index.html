@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>kitchensink</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" th:href="@{/css/screen.css}" type="text/css" />
+</head>
+<body>
+<div  id="content" th:fragment="contentFragment">
+        <h1>Welcome to JBoss!</h1>
+        <div>
+            <p>You have successfully deployed a Jakarta EE Enterprise Application.</p>
+        </div>
+
+        <div>
+            <h2>Member Registration</h2>
+            <p>Enforces annotation-based constraints defined on the model class.</p>
+            <div th:if="${member != null}">
+            <form th:action="@{/createMember}" th:object="${member}" th:method="post">
+                <table  class="titleCell">
+                    <tr>
+                        <td><label for="name">Name:</label></td>
+                        <td><input type="text" id="name" th:field="*{name}"/></td>
+                        <td><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email:</label></td>
+                        <td><input type="email" id="email" th:field="*{email}" /></td>
+                        <td><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="phoneNumber">Phone #:</label></td>
+                        <td><input type="text" id="phoneNumber" th:field="*{phoneNumber}" /></td>
+                        <td><span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="invalid"></span></td>
+                    </tr>
+                </table>
+                <button type="submit">Register</button>
+                <div th:if="${message != null and !message.isEmpty()}">
+                    <em><span th:text="${message}"></span></em>
+                </div>
+            </form>
+            </div>
+            <div th:unless="${member != null}">
+                <p>Member details are not available.</p>
+            </div>
+        </div>
+
+        <h2>Members</h2>
+        <div th:unless="${members != null and !members.isEmpty()}">
+            <em>No registered members.</em>
+        </div>
+        <table th:if="${members != null and !members.isEmpty()}" th:object="${members}" class="simpletablestyle">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone #</th>
+                <th>REST URL</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.id}"></td>
+                <td th:text="${member.name}"></td>
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.phoneNumber}"></td>
+                <td>
+                    <a th:href="@{/members/{id}(id=${member.id})}">/rest/members/<span th:text="${member.id}"></span></a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">REST URL for all members: <a th:href="@{/members}">/rest/members</a></td>
+            </tr>
+            </tfoot>
+        </table>
+</div>
+</body>
